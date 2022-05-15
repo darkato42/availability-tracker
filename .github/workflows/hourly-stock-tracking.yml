@@ -29,3 +29,8 @@ jobs:
       - run: |
           pip install -r requirements.txt
           python check.py "${{ secrets.from_address }}" "${{ secrets.gmail_app_secret }}" "${{ secrets.product_urls_gist }}" "${{ secrets.to_address }}"
+        id: runpython
+        
+      # Print logs
+      - name: Print changelog
+        run: echo "${{ steps.runpython.outputs.changelog }}"
