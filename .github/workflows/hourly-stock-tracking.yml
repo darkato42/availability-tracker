@@ -27,5 +27,5 @@ jobs:
       - name: Run Check.py
         run: |
           pip install -r requirements.txt
-          python check.py "${{ secrets.from_address }}" "${{ secrets.gmail_app_secret }}" "${{ secrets.product_urls_gist }}" "${{ secrets.to_address }}"
-          echo "::set-output name=changelog::$output"
+          python check.py ${{ secrets.from_address }} ${{ secrets.gmail_app_secret }} ${{ secrets.product_urls_gist }} ${{ secrets.to_address }}
+          echo ::set-output name=changelog::$output
