@@ -8,11 +8,20 @@ def get_product_urls(config='product-urls.yml'):
     """
     Returns a list of product urls
     """
+
+    if "http" in config:
+        config_file = requests.get(config).text
+        try:
+            product_urls = yaml.safe_load(config_file).get("products")
+        except yaml.YAMLError as exc:
+            print(exc)
+
     with open(config, "r") as stream:
         try:
             product_urls = yaml.safe_load(stream).get("products")
         except yaml.YAMLError as exc:
             print(exc)
+
     return product_urls
 
 
