@@ -18,19 +18,14 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
-      # Run check.py
-      - name: Run python script
-        uses: actions/setup-python@v3
+      
+      - uses: actions/setup-python@v3
         with:
           python-version: '3.x'
-      - run: |
+      
+      - name: Run Check.py
+        run: |
           pip install -r requirements.txt
           python check.py "${{ secrets.from_address }}" "${{ secrets.gmail_app_secret }}" "${{ secrets.product_urls_gist }}" "${{ secrets.to_address }}"
-        id: runpython
-        
-      # Print logs
-      - name: Print changelog
-        run: echo "${{ steps.runpython.outputs.changelog }}"
+          echo "::set-output name=changelog::$output"
